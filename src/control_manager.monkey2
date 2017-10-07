@@ -1,5 +1,5 @@
 Class Control
-	Field Trigger:Bool()
+	Field Condition:Bool()
 	Field Callback:Void()
 	Field Enabled:Bool = True	
 End
@@ -9,9 +9,9 @@ Class ControlManager
 	
 	Field Controls := New Map<String,Control>
 	
-	Method Add ( key:String, trigger:Bool(), callback:Void() )
+	Method Add ( key:String, condition:Bool(), callback:Void() )
 		Local control := New Control()
-		control.Trigger = trigger
+		control.Condition = condition
 		control.Callback = callback
 		
 		Controls.Add( key, control )
@@ -43,7 +43,7 @@ Class ControlManager
 	
 	Method OnUpdate ()
 		For Local control := Eachin Controls.Values
-			If control.Enabled And control.Trigger()
+			If control.Enabled And control.Condition()
 				control.Callback()
 			End
 		Next		
